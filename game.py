@@ -89,5 +89,5 @@ class Move():
             print("That spot doesn't exist\n")
         return False
 
-game = TicTacToe(HumanPlayer('x'), ComputerPlayer('o'))
+game = TicTacToe(HumanPlayer('x'), HumanPlayer('o'))
 game.start()
