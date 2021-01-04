@@ -5,7 +5,7 @@ from player import HumanPlayer, ComputerPlayer
 class TicTacToe:
     def __init__(self, x_player, o_player):
         #declares a 2D Array with whitespaces
-        self.board = [[' ' * 3], [' ' * 3], [' ' * 3]]
+        self.board = [['a'] * 4, ['b' ] * 3, ['c'] * 3]
         self.x_player = x_player
         self.o_player = o_player
         self.current_player = None
@@ -16,19 +16,16 @@ class TicTacToe:
         
         #clears the cmd or terminal
         os.system('cls')
-        #the first part is to only print -- if it is not the first row
-        first = True
-        first2 = True
-        for r in self.board:
-            print('-- ' * 4) if not first else None
-            first = False
-            for c in r:
-                print('| '.join(c).join(' |')) if not first2 else None
-                first2 = False
+
+        for r in range(0, len(self.board[0]) - 1):
+            for c in range(0, 3):
+                print((self.board[r][c]), end='')
+                print(' | ', end='') if not c > 1 else None
+            print('\n----------') if not r == (len(self.board[0]) - 2) else None
 
     #this method updates a spot on the 2D array game board with the current player's letter
     def update_spot(self, r_spot, c_spot):
-        self.board[r_spot][c_spot] = self.current_player.letter
+        self.board[2][0] = self.current_player.letter
 
     #this method starts the game
     def start(self):
@@ -40,9 +37,12 @@ class TicTacToe:
     def runtime(self):
         while self.game_is_running:
             #get the current player's move
-            print('Player', self.current_player.letter.join('\'s'), 'move: ')
+            print('Player', self.current_player.letter + ('\'s'), 'move: ')
             self.player_move = self.process_input(self.current_player.get_move())
-            self.update_spot(self.player_move.r_spot, self.player_move.c_spot)
+            #self.update_spot(self.player_move.r_spot, self.player_move.c_spot)
+            self.print_board()
+            self.game_is_running = False
+            break
 
 
     #this processes a players input and calls the correct methods if it can understand the input
@@ -60,6 +60,9 @@ class Move():
         self.r_spot = r_spot
         self.c_spot = c_spot
         self.player = player
+
+    def __str__(self):
+        return('[' + str(self.r_spot) + ', ' + str(self.c_spot) + "]")
 
 game = TicTacToe(HumanPlayer('x'), ComputerPlayer('o'))
 game.start()
