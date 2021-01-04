@@ -52,6 +52,11 @@ class TicTacToe:
                 self.print_board(True)
             else:
                 self.print_board(False)
+            
+            if self.current_player.letter == 'x':
+                self.current_player = self.o_player
+            else:
+                self.current_player = self.x_player
 
 
     #this processes a players input and calls the correct methods if it can understand the input
