@@ -10,12 +10,19 @@ class TicTacToe:
         self.o_player = o_player
         self.current_player = None
         self.game_is_running = False
+        self.needs_cleared = False
         
+    #this simply prints the board with its current values
     def print_board(self, clear):
-        #this simply prints the board with its current values
+        #notes if board is going to be cleared on not
+        self.temp_clear = clear
         
         #clears the cmd or terminal
-        os.system('cls') if clear else None
+        os.system('cls') if clear or self.needs_cleared else None
+        self.needs_cleared = False
+
+        #this will set the board to need to be cleared in the future because it was not cleared on this print
+        self.needs_cleared = True if not self.temp_clear else None
 
         for r in range(0, len(self.board[0])):
             for c in range(0, 3):
@@ -46,7 +53,6 @@ class TicTacToe:
                 self.print_board(False)
 
 
-
     #this processes a players input and calls the correct methods if it can understand the input
     def process_input(self, p_input):
         try:
@@ -56,7 +62,7 @@ class TicTacToe:
             return Move(5, 5, self.current_player, False)
 
 
-
+#This is class for a move on the board
 class Move():
     def __init__(self, r_spot, c_spot, player, valid):
         self.r_spot = r_spot
@@ -66,8 +72,10 @@ class Move():
         self.valid = self.check_valid() if self.valid else None
 
     def __str__(self):
+        #updated the __str__ to easily print the move
         return('[' + str(self.r_spot) + ', ' + str(self.c_spot) + "]")
 
+    #This ensures the move is within the boundaries of the board. If it isn't it warns the player
     def check_valid(self):
         if self.r_spot >= 0 and self.r_spot < 3 and self.c_spot >= 0 and self.c_spot < 3:
             return True
