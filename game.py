@@ -62,7 +62,7 @@ class TicTacToe:
             p_move = Move(5, 5, self.current_player, False)
             if not p_move.valid:
                 os.system('cls')
-                print("Unkown input! Please try again!\n")
+                print("Unknown input! Please try again!\n")
             return p_move
 
 
