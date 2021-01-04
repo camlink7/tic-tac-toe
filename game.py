@@ -57,5 +57,12 @@ class TicTacToe:
             return None
 
 
+
+class Move():
+    def __init__(self, r_spot, c_spot, player):
+        self.r_spot = r_spot
+        self.c_spot = c_spot
+        self.player = player
+
 game = TicTacToe(HumanPlayer('x'), ComputerPlayer('o'))
 game.start()
