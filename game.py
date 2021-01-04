@@ -1,4 +1,4 @@
 import math
 
-class Tic_Tac_Toe:
+class TicTacToe:
     def __init__(self)
