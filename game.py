@@ -9,6 +9,7 @@ class TicTacToe:
         self.x_player = x_player
         self.o_player = o_player
         self.current_player = None
+        self.game_is_running = False
         
     def print_board(self):
         #this simply prints the board with its current values
@@ -25,15 +26,20 @@ class TicTacToe:
                 print('| '.join(c).join(' |')) if not first2 else None
                 first2 = False
 
+    #this method updates a spot on the 2D array game board with the current player's letter
     def update_spot(self, r_spot, c_spot):
         self.board[r_spot][c_spot] = self.current_player.letter
 
+    #this method starts the game
     def start(self):
        self.current_player = self.x_player
+       self.game_is_running = True
        self.runtime()
 
+    #this is the runtime code of the game
     def runtime(self):
-        
+        while self.game_is_running:
+            break
 
 game = TicTacToe(HumanPlayer('x'), ComputerPlayer('o'))
 game.print_board()
