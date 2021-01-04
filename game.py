@@ -39,7 +39,23 @@ class TicTacToe:
     #this is the runtime code of the game
     def runtime(self):
         while self.game_is_running:
-            break
+            #get the current player's move
+            print('Player', self.current_player.letter.join('\'s'), 'move: ')
+            if self.process_input(self.current_player.get_move()):
+                print
+
+
+    #this processes a players input and calls the correct methods if it can understand the input
+    def process_input(self, p_input):
+        self.r_spot = None
+        self.c_spot = None
+        try:
+            self.r_spot = (p_input.strip().split(','))[0]
+
+        except:
+            print("\nUnknown input! Please try again!\n")
+            return None
+
 
 game = TicTacToe(HumanPlayer('x'), ComputerPlayer('o'))
-game.print_board()
+game.start()
