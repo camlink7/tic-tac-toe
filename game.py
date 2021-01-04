@@ -18,7 +18,7 @@ class TicTacToe:
         self.temp_clear = clear
         
         #clears the cmd or terminal
-        os.system('cls') if clear or self.needs_cleared else None
+        os.system('cls') if clear else None
         self.needs_cleared = False
 
         #this will set the board to need to be cleared in the future because it was not cleared on this print
@@ -42,6 +42,7 @@ class TicTacToe:
 
     #this is the runtime code of the game
     def runtime(self):
+        self.print_board(True)
         while self.game_is_running:
             #get the current player's move
             print('\n\nPlayer', self.current_player.letter + ('\'s'), 'move: ', end='')
@@ -58,8 +59,12 @@ class TicTacToe:
         try:
             return Move(int((p_input.strip().split(','))[0]), int((p_input.strip().split(','))[1]), self.current_player, True)
         except:
-            print("\nUnkown input! Please try again!\n")
-            return Move(5, 5, self.current_player, False)
+            p_move = Move(5, 5, self.current_player, False)
+            if not p_move.valid:
+                os.system('cls')
+                print("Unkown input! Please try again!\n")
+            return p_move
+
 
 
 #This is class for a move on the board
@@ -80,7 +85,8 @@ class Move():
         if self.r_spot >= 0 and self.r_spot < 3 and self.c_spot >= 0 and self.c_spot < 3:
             return True
         elif self.r_spot < 0 or self.r_spot > 2 or self.c_spot < 0 or self.c_spot > 2:
-            print("\nThat spot doesn't exist\n")
+            os.system('cls')
+            print("That spot doesn't exist\n")
         return False
 
 game = TicTacToe(HumanPlayer('x'), ComputerPlayer('o'))
