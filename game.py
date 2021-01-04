@@ -42,6 +42,7 @@ class TicTacToe:
             #get the current player's move
             print('Player', self.current_player.letter.join('\'s'), 'move: ')
             self.player_move = self.process_input(self.current_player.get_move())
+            self.update_spot(self.player_move.r_spot, self.player_move.c_spot)
 
 
     #this processes a players input and calls the correct methods if it can understand the input
