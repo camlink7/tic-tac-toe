@@ -36,11 +36,21 @@ class TicTacToe:
         if self.board[r_spot][c_spot] == ' ':
             self.board[r_spot][c_spot] = self.current_player.letter
             self.print_board(True)
+            self.move_successful = True
         else:
             os.system('cls')
             print("That spot is already taken!\n")
             self.print_board(False)
 
+    #this method checks for a winner of the game
+    def check_for_winner(self):
+        
+
+    #this method checks to see if the game board is full
+    def check_for_full_board(self):
+        for r in range(0, len(self.board[0])):
+            for c in range(0, 3):
+                if self.board[r][c] == ' '
 
     #this method starts the game
     def start(self):
@@ -53,7 +63,7 @@ class TicTacToe:
         self.print_board(True)
         while self.game_is_running:
             #set move_successful to false
-            
+            self.move_successful = False
             #get the current player's move
             print('\n\nPlayer', self.current_player.letter + ('\'s'), 'move: ', end='')
             self.player_move = self.process_input(self.current_player.get_move())
@@ -62,11 +72,14 @@ class TicTacToe:
             else:
                 self.print_board(False)
 
-            #go to the opposite player for their turn
-            if self.current_player.letter == 'x':
-                self.current_player = self.o_player
-            else:
-                self.current_player = self.x_player
+            if self.check_for_winner:
+                break
+            #go to the opposite player for their turn only if the move was successful
+            if self.move_successful:
+                if self.current_player.letter == 'x':
+                    self.current_player = self.o_player
+                else:
+                    self.current_player = self.x_player
 
 
     #this processes a players input and calls the correct methods if it can understand the input
