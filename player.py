@@ -10,7 +10,12 @@ class Player:
 class ComputerPlayer(Player):
     def __init__(self, letter):
         super().__init__(letter)
+    
+    def get_move(self):
+        return('0,1')
+    
 
 class HumanPlayer(Player):
     def __init(self, letter):
         super().__init__(letter)
+
