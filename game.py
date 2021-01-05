@@ -31,6 +31,7 @@ class TicTacToe:
                 print((self.board[r][c]), end='')
                 print(' | ', end='') if not c > 1 else None
             print('\n----------') if not r == (len(self.board) - 1) else None
+        print('')
 
     #this method updates a spot on the 2D array game board with the current player's letter
     def update_spot(self, r_spot, c_spot):
@@ -77,6 +78,7 @@ class TicTacToe:
                     self.end('Player O has won!')
                     return True
                 output = ''
+                
 
                 
         else:
