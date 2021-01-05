@@ -5,7 +5,7 @@ from player import HumanPlayer, ComputerPlayer
 class TicTacToe:
     def __init__(self, x_player, o_player):
         #declares a 2D Array with whitespaces
-        self.board = [[' '] * 3, [' ' ] * 3, [' '] * 3]
+        self.board = [[' ' for i in range(50)] for j in range(50)]
         self.x_player = x_player
         self.o_player = o_player
         self.current_player = None
@@ -28,9 +28,9 @@ class TicTacToe:
 
         for r in range(0, len(self.board)):
             for c in range(0, len(self.board[0])):
-                print((self.board[r][c]), end='')
-                print(' | ', end='') if not c > 1 else None
-            print('\n----------') if not r == (len(self.board) - 1) else None
+                print((' ' + self.board[r][c]), end='') 
+                print('  | ', end='') if not c == len(self.board[0]) - 1 else None
+            print('\n' + ('-----' * len(self.board[0])) + '--') if not r == (len(self.board) - 1) else None
         print('')
 
     #this method updates a spot on the 2D array game board with the current player's letter
@@ -54,11 +54,11 @@ class TicTacToe:
             for r in range(0, len(self.board)):
                 for c in range(0, len(self.board[0])):
                     output += self.board[r][c]
-                if output == 'xxx':
+                if output == 'x' * len(self.board[0]):
                     self.game_winner = self.x_player
                     self.end('Player X has won!')
                     return True
-                elif output == 'ooo':
+                elif output == 'o' * len(self.board[0]):
                     self.game_winner = self.o_player
                     self.end('Player O has won!')
                     return True
@@ -69,17 +69,18 @@ class TicTacToe:
             for c in range(0, len(self.board[0])):
                 for r in range(0, len(self.board)):
                     output += self.board[r][c]
-                if output == 'xxx':
+                if output == 'x' * len(self.board):
                     self.game_winner = self.x_player
                     self.end('Player X has won!')
                     return True
-                elif output == 'ooo':
+                elif output == 'o' * len(self.board):
                     self.game_winner = self.o_player
                     self.end('Player O has won!')
                     return True
                 output = ''
                 
-
+            #checks for 3 in a diagonal from left to right
+            
                 
         else:
             #ends game, prints tie, and returns True is the game board is full
@@ -106,6 +107,7 @@ class TicTacToe:
         print(msg + '\n')
         self.print_board(False)
         self.game_is_running = False
+        input('\n\nPress enter key to close...')
 
 
     #this is the runtime code of the game
@@ -137,9 +139,9 @@ class TicTacToe:
     #this processes a players input and calls the correct methods if it can understand the input
     def process_input(self, p_input):
         try:
-            return Move(int((p_input.strip().split(','))[0]), int((p_input.strip().split(','))[1]), self.current_player, True)
+            return Move(int((p_input.strip().split(','))[0]), int((p_input.strip().split(','))[1]), self.current_player, True, self.board)
         except:
-            p_move = Move(5, 5, self.current_player, False)
+            p_move = Move(5, 5, self.current_player, False, self.board)
             if not p_move.valid:
                 os.system('cls')
                 print("Unknown input! Please try again!\n")
@@ -149,10 +151,11 @@ class TicTacToe:
 
 #This is class for a move on the board
 class Move():
-    def __init__(self, r_spot, c_spot, player, valid):
+    def __init__(self, r_spot, c_spot, player, valid, board):
         self.r_spot = r_spot
         self.c_spot = c_spot
         self.player = player
+        self.board = board
         self.valid = valid
         self.valid = self.check_valid() if self.valid else None
 
@@ -162,9 +165,9 @@ class Move():
 
     #This ensures the move is within the boundaries of the board. If it isn't it warns the player
     def check_valid(self):
-        if self.r_spot >= 0 and self.r_spot < 3 and self.c_spot >= 0 and self.c_spot < 3:
+        if self.r_spot >= 0 and self.r_spot < len(self.board) and self.c_spot >= 0 and self.c_spot < len(self.board[0]):
             return True
-        elif self.r_spot < 0 or self.r_spot > 2 or self.c_spot < 0 or self.c_spot > 2:
+        elif self.r_spot < 0 or self.r_spot >= len(self.board) or self.c_spot < 0 or self.c_spot >= len(self.board[0]):
             os.system('cls')
             print("That spot doesn't exist\n")
         return False
