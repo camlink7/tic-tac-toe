@@ -11,6 +11,7 @@ class TicTacToe:
         self.current_player = None
         self.game_is_running = False
         self.needs_cleared = False
+        self.move_successful = False
         
     #this simply prints the board with its current values
     def print_board(self, clear):
@@ -32,7 +33,14 @@ class TicTacToe:
 
     #this method updates a spot on the 2D array game board with the current player's letter
     def update_spot(self, r_spot, c_spot):
-        self.board[r_spot][c_spot] = self.current_player.letter
+        if self.board[r_spot][c_spot] == ' ':
+            self.board[r_spot][c_spot] = self.current_player.letter
+            self.print_board(True)
+        else:
+            os.system('cls')
+            print("That spot is already taken!\n")
+            self.print_board(False)
+
 
     #this method starts the game
     def start(self):
@@ -44,15 +52,17 @@ class TicTacToe:
     def runtime(self):
         self.print_board(True)
         while self.game_is_running:
+            #set move_successful to false
+            
             #get the current player's move
             print('\n\nPlayer', self.current_player.letter + ('\'s'), 'move: ', end='')
             self.player_move = self.process_input(self.current_player.get_move())
             if self.player_move.valid:
                 self.update_spot(self.player_move.r_spot, self.player_move.c_spot)
-                self.print_board(True)
             else:
                 self.print_board(False)
-            
+
+            #go to the opposite player for their turn
             if self.current_player.letter == 'x':
                 self.current_player = self.o_player
             else:
