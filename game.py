@@ -5,7 +5,7 @@ from player import HumanPlayer, ComputerPlayer
 class TicTacToe:
     def __init__(self, x_player, o_player):
         #declares a 2D Array with whitespaces
-        self.board = [[' ' for i in range(50)] for j in range(50)]
+        self.board = [[' ' for i in range(3)] for j in range(3)]
         self.x_player = x_player
         self.o_player = o_player
         self.current_player = None
@@ -29,8 +29,8 @@ class TicTacToe:
         for r in range(0, len(self.board)):
             for c in range(0, len(self.board[0])):
                 print((' ' + self.board[r][c]), end='') 
-                print('  | ', end='') if not c == len(self.board[0]) - 1 else None
-            print('\n' + ('-----' * len(self.board[0])) + '--') if not r == (len(self.board) - 1) else None
+                print(' |', end='') if not c == len(self.board[0]) - 1 else None
+            print('\n' + ('----' * len(self.board[0]))) if not r == (len(self.board) - 1) else None
         print('')
 
     #this method updates a spot on the 2D array game board with the current player's letter
