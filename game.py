@@ -44,19 +44,29 @@ class TicTacToe:
 
     #this method checks for a winner of the game
     def check_for_winner(self):
-        
+        #ensures board isnt full before checking for winner
+        if not self.check_for_full_board():
+            pass
+        else:
+            return 
 
     #this method checks to see if the game board is full
     def check_for_full_board(self):
         for r in range(0, len(self.board[0])):
             for c in range(0, 3):
-                if self.board[r][c] == ' '
+                if self.board[r][c] == ' ':
+                    return False
+        return True
 
     #this method starts the game
     def start(self):
        self.current_player = self.x_player
        self.game_is_running = True
        self.runtime()
+
+    #this method ends the game and prints a message out 
+    def end(self, msg):
+        pass
 
     #this is the runtime code of the game
     def runtime(self):
