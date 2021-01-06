@@ -13,6 +13,7 @@ class TicTacToe:
         self.needs_cleared = False
         self.move_successful = False
         self.game_winner = None
+        self.ai_score = 0
         
     #this simply prints the board with its current values
     def print_board(self, clear):
