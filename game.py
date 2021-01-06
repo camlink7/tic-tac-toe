@@ -126,9 +126,10 @@ class TicTacToe:
 
     #this method starts the game
     def start(self):
-       self.current_player = self.x_player
-       self.game_is_running = True
-       self.runtime()
+        self.tutorial()
+        self.current_player = self.x_player
+        self.game_is_running = True
+        self.runtime()
 
     #this method ends the game and prints a message out 
     def end(self, msg):
@@ -137,6 +138,13 @@ class TicTacToe:
         self.print_board(False)
         self.game_is_running = False
         input('\n\nPress enter key to close...')
+
+    #this method prints and runs the code for a simple tutorial of the game
+    def tutorial(self):
+        os.system('cls')
+        print('Welcome to Tic Tac Toe!\n-----------------------------\nTo choose a spot, simply put the coordinates in and seperate them with a comma\nExample: 0,0' +
+        '\nThis would pick the top left spot\n\nPress enter to start the game!')
+        input('')
 
 
     #this is the runtime code of the game
