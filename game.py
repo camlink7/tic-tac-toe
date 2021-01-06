@@ -4,7 +4,7 @@ from player import HumanPlayer, ComputerPlayer
 
 class TicTacToe:
     def __init__(self, x_player, o_player, col, row):
-        #declares a 2D Array with whitespaces
+        #declares a 2D list with whitespaces
         self.board = [[' ' for i in range(col)] for j in range(row)]
         self.x_player = x_player
         self.o_player = o_player
@@ -33,7 +33,7 @@ class TicTacToe:
             print('\n' + ('----' * len(self.board[0]))) if not r == (len(self.board) - 1) else None
         print('')
 
-    #this method updates a spot on the 2D array game board with the current player's letter
+    #this method updates a spot on the 2D list game board with the current player's letter
     def update_spot(self, r_spot, c_spot):
         if self.board[r_spot][c_spot] == ' ':
             self.board[r_spot][c_spot] = self.current_player.letter
@@ -154,7 +154,7 @@ class TicTacToe:
             #set move_successful to false
             self.move_successful = False
             #get the current player's move
-            print('\n\nPlayer', self.current_player.letter + ('\'s'), 'move: ', end='')
+            print('\n\nPlayer ' + self.current_player.letter + ('\'s ') + 'move: ', end='')
             self.player_move = self.process_input(self.current_player.get_move())
             if self.player_move.valid:
                 self.update_spot(self.player_move.r_spot, self.player_move.c_spot)
@@ -185,7 +185,6 @@ class TicTacToe:
             return p_move
 
 
-
 #This is class for a move on the board
 class Move():
     def __init__(self, r_spot, c_spot, player, valid, board):
@@ -209,5 +208,5 @@ class Move():
             print("That spot doesn't exist\n")
         return False
 
-game = TicTacToe(HumanPlayer('x'), HumanPlayer('o'), 3, 3)
+game = TicTacToe(HumanPlayer('x'), ComputerPlayer('o'), 3, 3)
 game.start()
