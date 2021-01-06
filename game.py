@@ -3,9 +3,9 @@ import os
 from player import HumanPlayer, ComputerPlayer
 
 class TicTacToe:
-    def __init__(self, x_player, o_player):
+    def __init__(self, x_player, o_player, col, row):
         #declares a 2D Array with whitespaces
-        self.board = [[' ' for i in range(3)] for j in range(3)]
+        self.board = [[' ' for i in range(col)] for j in range(row)]
         self.x_player = x_player
         self.o_player = o_player
         self.current_player = None
@@ -79,8 +79,37 @@ class TicTacToe:
                     return True
                 output = ''
                 
-            #checks for 3 in a diagonal from left to right
-            
+            #checks for 3 in a diagonal from left to right if the board is evenly squared and not oblong
+            if len(self.board) == len(self.board[0]):
+                output = ''
+                length = len(self.board)
+                for r in range(0, length):
+                    output += self.board[r][r]
+                    if output == 'x' * length:
+                        self.game_winner = self.x_player
+                        self.end('Player X has won!')
+                        return True
+                    elif output == 'o' * length:
+                        self.game_winner = self.o_player
+                        self.end('Player O has won!')
+                        return True
+
+            #checks for 3 in a diagonal from right to left if the board is evenly squared and not oblong
+            if len(self.board) == len(self.board[0]):
+                output = ''
+                length = len(self.board)
+                count = length - 1
+                for r in range(0, length):
+                    output += self.board[r][count]
+                    count -= 1
+                    if output == 'x' * length:
+                        self.game_winner = self.x_player
+                        self.end('Player X has won!')
+                        return True
+                    elif output == 'o' * length:
+                        self.game_winner = self.o_player
+                        self.end('Player O has won!')
+                        return True
                 
         else:
             #ends game, prints tie, and returns True is the game board is full
@@ -172,5 +201,5 @@ class Move():
             print("That spot doesn't exist\n")
         return False
 
-game = TicTacToe(HumanPlayer('x'), ComputerPlayer('o'))
+game = TicTacToe(HumanPlayer('x'), HumanPlayer('o'), 3, 3)
 game.start()
