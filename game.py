@@ -124,6 +124,17 @@ class TicTacToe:
                     return False
         return True
 
+    #this method will get an return a list of strings that are the available spots that can be played
+    def get_available_spots(self):
+        output = []
+        for r in range(0, len(self.board)):
+            for c in range(0, len(self.board[0])):
+                if self.board[r][c] == ' ':
+                    output.append(str(r) + ',' + str(c))
+        return output
+
+
+
     #this method starts the game
     def start(self):
         self.tutorial()
