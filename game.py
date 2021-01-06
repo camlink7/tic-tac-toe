@@ -138,6 +138,8 @@ class TicTacToe:
     #this method starts the game
     def start(self):
         self.tutorial()
+        self.x_player.set_game(self)
+        self.o_player.set_game(self)
         self.current_player = self.x_player
         self.game_is_running = True
         self.runtime()
