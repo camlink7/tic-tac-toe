@@ -1,4 +1,4 @@
-
+import os
 #This is class for a move on the board
 class Move():
     def __init__(self, r_spot, c_spot, player, valid, board):
